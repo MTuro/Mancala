@@ -1,5 +1,5 @@
 import unittest
-from mancala import realiza_jogada, verifica_fim, valida_jogada, pega_todas_peças, captura_peça
+from mancala import realiza_jogada, verifica_fim, valida_jogada, pega_todas_pecas ,captura_peca
 
 #testa realiza jogada
 def test_realiza_jogada():
@@ -34,14 +34,14 @@ def test_valida_jogada_invalid_jogador_2_casa_superior():
     assert not valida_jogada(tabuleiro, 0, 3)
 
 #testa pega todas as peças
-def test_pega_todas_peças():
+def test_pega_todas_pecas():
     tabuleiro = [[0] * 6, [4, 4, 0, 1, 5, 5], [0, 0]]
-    pega_todas_peças(tabuleiro, 0)
+    pega_todas_pecas(tabuleiro, 0)
     assert tabuleiro == [[0] * 6, [0] * 6, [0, 0]]
 
 #testa captura peça
-def test_captura_peça():
+def test_captura_peca():
     tabuleiro = [[0, 0, 0, 0, 0, 1], [1, 1, 1, 1, 1, 0], [0, 0]]
-    captura_peça(tabuleiro, 0, 5)
+    captura_peca(tabuleiro, 0, 5)
     assert tabuleiro == [[0, 0, 0, 0, 0, 0], [1, 1, 1, 1, 1, 0], [0, 1]]
     
