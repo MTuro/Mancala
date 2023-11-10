@@ -17,6 +17,6 @@ def pega_todas_pecas():{
     
 }
 
-def captura_peca():{
+def captura_peca ():{
     
 }
