@@ -1,4 +1,4 @@
-import pygame
+
 
 def realiza_jogada():{
     
