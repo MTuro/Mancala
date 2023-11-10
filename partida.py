@@ -1,6 +1,5 @@
-def realiza_jogada():{
-    
-}
+def realiza_jogada():
+  pass
 
 
 ########################## verifica fim ##################################
