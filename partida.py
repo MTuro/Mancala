@@ -51,6 +51,19 @@ def pega_todas_pecas(tabuleiro):
     # Retorna o tabuleiro final para ser renderizado.
     return tabuleiroFinal
 
-def captura_peca ():{
+def captura_peca (tabuleiro,jogador,coluna):
+    # Cria uma cópia do tabuleiro.
+    tabuleiroNovo = tabuleiro
+
+    # Soma as peças envolvidas na captura a mancala do jogador que capturou.
+    if jogador == 0:
+      tabuleiroNovo[2][0] += tabuleiro[1][coluna] + 1
+    else:
+      tabuleiroNovo[2][1] += tabuleiro[0][coluna] + 1
+
+    # Zera o número de peças nas casas envolvidas na captura (todas as peças envolvidas vão para a Mancala daquele que capturou).
+    tabuleiroNovo[0][coluna] = 0
+    tabuleiroNovo[1][coluna] = 0
     
-}
+    # Retorna o tabuleiro pós-captura para ser renderizado.
+    return tabuleiroNovo
