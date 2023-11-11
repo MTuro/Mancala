@@ -1,5 +1,44 @@
-def realiza_jogada():
-  pass
+def realiza_jogada(tabuleiro, jogador, coluna):
+  #Faz uma cópia do tabuleiro.
+  tabuleiroNovo = tabuleiro
+  
+  #Passa a quantidade de peças da casa seleciona para variável pecas.
+  pecas = tabuleiroNovo[jogador][coluna]
+
+  #Zera a casa selecionada para a jogada.
+  tabuleiroNovo[jogador][coluna] = 0
+
+  #Variável auxiliar para loop de quem esta realizando jogada.
+  aux = coluna + 1
+
+  #Variável que armazena o jogador oponente nesta rodada.
+  oponente = 1 - jogador
+
+  #Loop da jogada.
+  while pecas > 0:
+
+    #Loop que distribui as peças nas casas e mancala do jogador desta rodada.
+    for i in range(aux, 7):
+      if pecas <= 0:
+        break
+      if i == 6:
+        tabuleiroNovo[2][jogador] += 1
+        pecas -= 1
+        break
+      tabuleiroNovo[jogador][i] += + 1
+      pecas -= 1
+
+    #Loop que distribui as peças nas casas do jogador oponente.
+    for i in range(0, 6):
+      if pecas <= 0:
+        break
+      tabuleiroNovo[oponente][i] += 1
+      pecas -= 1
+
+    aux = 0
+
+  #Retorna tabuleiro para ser renderizado.
+  return tabuleiroNovo
 
 
 ########################## verifica fim ##################################
