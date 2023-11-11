@@ -1,7 +1,11 @@
 def realiza_jogada(tabuleiro, jogador, coluna):
+  #Passa coluna, apenas quando é o jogador 2, para index correto da lista
+  if jogador == 1:
+    coluna = coluna - 6
+
   #Faz uma cópia do tabuleiro.
   tabuleiroNovo = tabuleiro
-  
+
   #Passa a quantidade de peças da casa seleciona para variável pecas.
   pecas = tabuleiroNovo[jogador][coluna]
 
@@ -25,7 +29,7 @@ def realiza_jogada(tabuleiro, jogador, coluna):
         tabuleiroNovo[2][jogador] += 1
         pecas -= 1
         break
-      tabuleiroNovo[jogador][i] += + 1
+      tabuleiroNovo[jogador][i] += +1
       pecas -= 1
 
     #Loop que distribui as peças nas casas do jogador oponente.
