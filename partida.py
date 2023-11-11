@@ -62,10 +62,19 @@ def verifica_fim():
 ##############################################################################
 
 
+def valida_jogada(tabuleiro, jogador, coluna):
+  #Retorna False se casa estiver vazia.
+  if jogador == 1:
+    if coluna < 6 or tabuleiro[jogador][coluna - 6] == 0:
+      return False
+    elif 6 <= coluna <= 11:
+      return True
+  elif jogador == 0:
+    if coluna > 5 or tabuleiro[jogador][coluna] == 0:
+      return False
+    elif 0 <= coluna <= 5:
+      return True  
 
-def valida_jogada():{
-    
-}
 
 def pega_todas_pecas(tabuleiro):
     # Soma todas as peças de cada jogador, incluindo as peças em suas Mancalas
