@@ -1,5 +1,5 @@
 import unittest
-from mancala import realiza_jogada, verifica_fim, valida_jogada, pega_todas_pecas ,captura_peca
+from partida import realiza_jogada, verifica_fim, valida_jogada, pega_todas_pecas ,captura_peca
 
 #testa realiza jogada
 def test_realiza_jogada():

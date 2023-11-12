@@ -65,6 +65,15 @@ def verifica_fim():
     return
 ##############################################################################
 
+def verifica_fim(tabuleiro):
+  # Soma das peças das casas de cada fileira
+  soma_j1 = sum(tabuleiro[0])
+  soma_j2 = sum(tabuleiro[1])
+
+  # Se alguma das fileiras não tiver nenhuma peça, retorna o tabuleiro gerado pela função pega_todas_pecas. Caso contrário, retorna o tabuleiro original.
+  if soma_j1 == 0 or soma_j2 == 0:
+    return pega_todas_pecas()
+  return tabuleiro
 
 def valida_jogada(tabuleiro, jogador, coluna):
   #Retorna False se casa estiver vazia.
@@ -81,40 +90,40 @@ def valida_jogada(tabuleiro, jogador, coluna):
 
 
 def pega_todas_pecas(tabuleiro):
-    # Soma todas as peças de cada jogador, incluindo as peças em suas Mancalas
-    soma_final1 = sum(tabuleiro[0]) + tabuleiro[2][0]
-    soma_final2 = sum(tabuleiro[1]) + tabuleiro[2][1]
+  # Soma todas as peças de cada jogador, incluindo as peças em suas Mancalas
+  soma_final1 = sum(tabuleiro[0]) + tabuleiro[2][0]
+  soma_final2 = sum(tabuleiro[1]) + tabuleiro[2][1]
 
-    # Cria um tabuleiro final onde em cada mancala há a quantidade exata de peças que cada jogador possuía na jogada final, e zera as outras casas.
-    tabuleiroFinal = [[0]*6,[0]*6,[soma_final1,soma_final2]]
+  # Cria um tabuleiro final onde em cada mancala há a quantidade exata de peças que cada jogador possuía na jogada final, e zera as outras casas.
+  tabuleiroFinal = [[0]*6,[0]*6,[soma_final1,soma_final2]]
 
-    # A pontuação final de cada jogador é o número de peças em cada Mancala, que pode ser acessado por tabuleiroFinal[2].
-    print(f"FIM DE JOGO.\nJogador 1: {tabuleiroFinal[2][0]} pontos.\nJogador 2: {tabuleiroFinal[2][1]} pontos.\n")
+  # A pontuação final de cada jogador é o número de peças em cada Mancala, que pode ser acessado por tabuleiroFinal[2].
+  print(f"FIM DE JOGO.\nJogador 1: {tabuleiroFinal[2][0]} pontos.\nJogador 2: {tabuleiroFinal[2][1]} pontos.\n")
 
-    # Print do resultado do jogo.
-    if soma_final1 > soma_final2:
-      print("O jogador 1 foi o vencedor.")
-    elif soma_final1 < soma_final2:
-      print("O jogador 2 foi o vencedor.")
-    else:
-      print("Empate.")
+  # Print do resultado do jogo.
+  if soma_final1 > soma_final2:
+    print("O jogador 1 foi o vencedor.")
+  elif soma_final1 < soma_final2:
+    print("O jogador 2 foi o vencedor.")
+  else:
+    print("Empate.")
 
-    # Retorna o tabuleiro final para ser renderizado.
-    return tabuleiroFinal
+  # Retorna o tabuleiro final para ser renderizado.
+  return tabuleiroFinal
 
 def captura_peca (tabuleiro,jogador,coluna):
-    # Cria uma cópia do tabuleiro.
-    tabuleiroNovo = tabuleiro
+  # Cria uma cópia do tabuleiro.
+  tabuleiroNovo = tabuleiro
 
-    # Soma as peças envolvidas na captura a mancala do jogador que capturou.
-    if jogador == 0:
-      tabuleiroNovo[2][0] += tabuleiro[1][coluna] + 1
-    else:
-      tabuleiroNovo[2][1] += tabuleiro[0][coluna] + 1
+  # Soma as peças envolvidas na captura a mancala do jogador que capturou.
+  if jogador == 0:
+    tabuleiroNovo[2][0] += tabuleiro[1][coluna] + 1
+  else:
+    tabuleiroNovo[2][1] += tabuleiro[0][coluna] + 1
 
-    # Zera o número de peças nas casas envolvidas na captura (todas as peças envolvidas vão para a Mancala daquele que capturou).
-    tabuleiroNovo[0][coluna] = 0
-    tabuleiroNovo[1][coluna] = 0
-    
-    # Retorna o tabuleiro pós-captura para ser renderizado.
-    return tabuleiroNovo
+  # Zera o número de peças nas casas envolvidas na captura (todas as peças envolvidas vão para a Mancala daquele que capturou).
+  tabuleiroNovo[0][coluna] = 0
+  tabuleiroNovo[1][coluna] = 0
+  
+  # Retorna o tabuleiro pós-captura para ser renderizado.
+  return tabuleiroNovo
