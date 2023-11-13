@@ -10,6 +10,45 @@ pygame.display.set_caption("Mancala")
 corTabuleiro = (222,184,135)
 corCasa = (106,75,53)
 
+def verificaClique(pos):
+    x, y = pos[0], pos[1]
+    casa = -1
+    fileira = -1
+
+    # Converte a coordenada x do clique numa casa de 0 a 5.
+    if x >= 185 and x <= 1215 and y >= 100 and y <= 700:
+        if x <= 340:
+            casa = 0
+        elif x > 360 and x <= 515:
+            casa = 1
+        elif x > 535 and x <= 690:
+            casa = 2
+        elif x > 710 and x <= 865:
+            casa = 3
+        elif x > 885 and x <= 1040:
+            casa = 4
+        elif x > 1060 and x <= 1215:
+            casa = 5
+
+        # Detecta a fileira clicada a partir da coordenada y.
+        # Dependendo da fileira clicada, mantém a casa igual ou a converte para um intervalo de 6 até 11, para as casas da fileira superior.
+        if y > 450:
+            fileira = 0
+        elif y < 350:
+            fileira = 1
+            casa = 11 - casa
+        else:
+            casa = -1
+    
+    # Printa a casa se for clicada corretamente, e retorna um erro se a região clicada for fora de uma casa.
+    if casa >= 0:
+        print(f'casa = {casa}\nx,y = {x,y}')
+    else:
+        print('Selecione uma casa valida.')
+    
+    # Retorna a casa e a fileira.
+    return casa, fileira
+
 def desenhaTabuleiro():
     # Tabuleiro
     pygame.draw.rect(tela,corTabuleiro,(50,50,WIDTH-100,HEIGHT-100),border_radius=30)
