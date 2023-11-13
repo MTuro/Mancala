@@ -21,7 +21,7 @@ def desenhaTabuleiro():
         pygame.draw.rect(tela,corCasa,(185+(175*i),100,155,250),border_radius=30)
         pygame.draw.rect(tela,corCasa,(185+(175*i),450,155,250),border_radius=30)
 
-def draw():
+def atualizaTabuleiro():
     # Cor de fundo
     tela.fill((44, 130, 87))
 
