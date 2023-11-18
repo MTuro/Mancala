@@ -2,9 +2,9 @@ import pygame
 import sys
 from tabuleiro import *
 
-pygame.init()
+tabuleiro = [[4] * 6, [4] * 6, [0, 0]]
 
-# Configs da janela
+pygame.init()
 
 # Loop do jogo
 run = True
@@ -15,4 +15,4 @@ while run:
         if event.type == pygame.MOUSEBUTTONUP:
             verificaClique(pygame.mouse.get_pos())
 
-    atualizaTabuleiro()
+    atualizaTabuleiro(tabuleiro)
