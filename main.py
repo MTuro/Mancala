@@ -1,6 +1,3 @@
-from tabuleiro import *
+from tabuleiro import rodar
 
-tabuleiro = [[4] * 6, [4] * 6, [0, 0]]
-turno = 0
-
-rodar(tabuleiro, turno)
+rodar()

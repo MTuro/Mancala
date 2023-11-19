@@ -1,5 +1,5 @@
 import pygame
-from partida import realiza_jogada
+from partida import realiza_jogada, verifica_fim
 
 WIDTH = 1400
 HEIGHT = 800
@@ -16,10 +16,10 @@ font = pygame.font.Font(None,50)
 corTabuleiro = (222,184,135)
 corCasa = (106,75,53)
 
-def verificaClique(tabuleiro,pos):
+def verificaClique(tabuleiro,pos,turno):
     x, y = pos[0], pos[1]
     casa = -1
-    fileira = -1
+    jogador = -1
 
     # Converte a coordenada x do clique numa casa de 0 a 5.
     if x >= 185 and x <= 1215 and y >= 100 and y <= 700:
@@ -39,21 +39,23 @@ def verificaClique(tabuleiro,pos):
         # Detecta a fileira clicada a partir da coordenada y.
         # Dependendo da fileira clicada, mantém a casa igual ou a converte para um intervalo de 6 até 11, para as casas da fileira superior.
         if y > 450:
-            fileira = 0
+            jogador = 0
         elif y < 350 and casa >= 0:
-            fileira = 1
+            jogador = 1
             casa = 11 - casa
         else:
             casa = -1
     
     # Printa a casa se for clicada corretamente, e retorna um erro se a região clicada for fora de uma casa.
-    if casa >= 0:
+    if casa >= 0 and jogador == turno:
         print(f'casa = {casa}\nx,y = {x,y}')
-        print(f'jogador = {fileira}')
-        realiza_jogada(tabuleiro,fileira,casa)
+        print(f'jogador = {jogador}')
+        realiza_jogada(tabuleiro,jogador,casa)
+        return 1 - turno
     else:
         print(f'x,y = {x,y}')
         print('Selecione uma casa valida.')
+        return turno
 
 def desenhaPeca(qtd,x,y):
     tela.blit(font.render(str(qtd), True, (255,0,0)),(x,y))
@@ -88,7 +90,11 @@ def atualizaTabuleiro(tabuleiro):
     # Atualizar a tela
     pygame.display.flip()
 
-def rodar(tabuleiro, turno):
+def rodar():
+
+    tabuleiro = [[4] * 6, [4] * 6, [0, 0]]
+    turno = 0
+
     pygame.init()
 
     # Loop do jogo
@@ -98,7 +104,7 @@ def rodar(tabuleiro, turno):
             if event.type == pygame.QUIT:
                 run = False
             if event.type == pygame.MOUSEBUTTONUP:
-                verificaClique(tabuleiro,pygame.mouse.get_pos())
-                turno = 1 - turno
+                turno = verificaClique(tabuleiro,pygame.mouse.get_pos(),turno)
+                tabuleiro = verifica_fim(tabuleiro)
 
         atualizaTabuleiro(tabuleiro)

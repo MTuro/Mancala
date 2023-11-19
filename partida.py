@@ -51,7 +51,8 @@ def verifica_fim(tabuleiro):
 
   # Se alguma das fileiras não tiver nenhuma peça, retorna o tabuleiro gerado pela função pega_todas_pecas. Caso contrário, retorna o tabuleiro original.
   if soma_j1 == 0 or soma_j2 == 0:
-    return pega_todas_pecas()
+    print("Fim de jogo.")
+    return pega_todas_pecas(tabuleiro)
   return tabuleiro
 
 def valida_jogada(tabuleiro, jogador, coluna):
@@ -66,7 +67,6 @@ def valida_jogada(tabuleiro, jogador, coluna):
       return False
     elif 0 <= coluna <= 5:
       return True  
-
 
 def pega_todas_pecas(tabuleiro):
   # Soma todas as peças de cada jogador, incluindo as peças em suas Mancalas
