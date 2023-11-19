@@ -16,7 +16,7 @@ font = pygame.font.Font(None,50)
 corTabuleiro = (222,184,135)
 corCasa = (106,75,53)
 
-def verificaClique(tabuleiro,pos,turno):
+def verificaClique(tabuleiro,pos):
     x, y = pos[0], pos[1]
     casa = -1
     fileira = -1
@@ -40,7 +40,7 @@ def verificaClique(tabuleiro,pos,turno):
         # Dependendo da fileira clicada, mantém a casa igual ou a converte para um intervalo de 6 até 11, para as casas da fileira superior.
         if y > 450:
             fileira = 0
-        elif y < 350:
+        elif y < 350 and casa >= 0:
             fileira = 1
             casa = 11 - casa
         else:
@@ -52,6 +52,7 @@ def verificaClique(tabuleiro,pos,turno):
         print(f'jogador = {fileira}')
         realiza_jogada(tabuleiro,fileira,casa)
     else:
+        print(f'x,y = {x,y}')
         print('Selecione uma casa valida.')
 
 def desenhaPeca(qtd,x,y):
@@ -86,3 +87,18 @@ def atualizaTabuleiro(tabuleiro):
     
     # Atualizar a tela
     pygame.display.flip()
+
+def rodar(tabuleiro, turno):
+    pygame.init()
+
+    # Loop do jogo
+    run = True
+    while run:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                run = False
+            if event.type == pygame.MOUSEBUTTONUP:
+                verificaClique(tabuleiro,pygame.mouse.get_pos())
+                turno = 1 - turno
+
+        atualizaTabuleiro(tabuleiro)
