@@ -19,7 +19,7 @@ def realiza_jogada(tabuleiro, jogador, coluna):
   oponente = 1 - jogador
 
   #Salva a casa em que a ultima peça cai
-  ultimo_peca = None
+  ultima_peca = None
 
   #Loop da jogada.
   while pecas > 0:
@@ -31,11 +31,11 @@ def realiza_jogada(tabuleiro, jogador, coluna):
       if i == 6:
         tabuleiroNovo[2][jogador] += 1
         pecas -= 1
-        ultimo_peca = (2, jogador)
+        ultima_peca = (2, jogador)
         break
       tabuleiroNovo[jogador][i] += +1
       pecas -= 1
-      ultimo_peca = (jogador, i)
+      ultima_peca = (jogador, i)
 
     #Loop que distribui as peças nas casas do jogador oponente.
     for i in range(0, 6):
@@ -43,10 +43,13 @@ def realiza_jogada(tabuleiro, jogador, coluna):
         break
       tabuleiroNovo[oponente][i] += 1
       pecas -= 1
-      ultimo_peca = (oponente, i)
+      ultima_peca = (oponente, i)
 
     aux = 0
 
+  #Salva jogador e coluna de onde cai a ultima peça
+  jogador, coluna = ultima_peca
+  
   #Retorna tabuleiro para ser renderizado.
   return tabuleiroNovo
 
