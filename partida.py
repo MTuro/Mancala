@@ -19,7 +19,7 @@ def realiza_jogada(tabuleiro, jogador, coluna):
   oponente = 1 - jogador
 
   #Salva a casa em que a ultima peça cai
-  ultima_peca = None
+  ultima_peca = (20, 20)
 
   #Loop da jogada.
   while pecas > 0:
@@ -48,7 +48,8 @@ def realiza_jogada(tabuleiro, jogador, coluna):
     aux = 0
 
   #Salva jogador e coluna de onde cai a ultima peça
-  jogador, coluna = ultima_peca
+  if(ultima_peca != None):
+    jogador, coluna = ultima_peca
   
   #Retorna tabuleiro para ser renderizado.
   return tabuleiroNovo
