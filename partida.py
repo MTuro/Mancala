@@ -100,7 +100,7 @@ def pega_todas_pecas(tabuleiro):
   # Retorna o tabuleiro final para ser renderizado.
   return tabuleiroFinal
 
-def captura_peca (tabuleiro,jogador,coluna):
+def captura_peca(tabuleiro,jogador,coluna):
   # Cria uma cópia do tabuleiro.
   tabuleiroNovo = tabuleiro
 

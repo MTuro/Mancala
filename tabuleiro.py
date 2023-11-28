@@ -48,8 +48,6 @@ def verificaClique(tabuleiro,pos,turno):
     
     # Printa a casa se for clicada corretamente, e retorna um erro se a região clicada for fora de uma casa.
     if casa >= 0 and jogador == turno and tabuleiro[jogador][casa - (6 * jogador)] != 0:
-        print(f'casa = {casa}\nx,y = {x,y}')
-        print(f'jogador = {jogador}')
         realiza_jogada(tabuleiro,jogador,casa)
         return 1 - turno
     else:
@@ -57,8 +55,20 @@ def verificaClique(tabuleiro,pos,turno):
         print('Selecione uma casa valida.')
         return turno
 
-def desenhaPeca(qtd,x,y):
+def desenhaPecaCasa(qtd,x,y):
     tela.blit(font.render(str(qtd), True, (255,0,0)),(x,y))
+
+    for i in range(qtd):
+        pos = i//4
+        pygame.draw.circle(tela,(255,0,0),(x+20+30*(i%4),y+50+(25*pos)),10)
+
+def desenhaPecaMancala(qtd,x,y):
+    tela.blit(font.render(str(qtd), True, (255,0,0)),(x,y-5))
+    
+    for i in range(qtd):
+        pos = i//2
+        pygame.draw.circle(tela,(255,0,0),(x+20+30*(i%2),y+50+(25*pos)),10)
+
 
 def desenhaTabuleiro(tabuleiro):
     # Tabuleiro
@@ -67,18 +77,18 @@ def desenhaTabuleiro(tabuleiro):
 
     # Mancala da esquerda
     pygame.draw.rect(tela,corCasa,(75,100,100,HEIGHT-200),border_radius=30)
-    desenhaPeca(tabuleiro[2][1],85,110)
+    desenhaPecaMancala(tabuleiro[2][1],85,110)
 
     #Mancala da direita
     pygame.draw.rect(tela,corCasa,(WIDTH-175,100,100,HEIGHT-200),border_radius=30)
-    desenhaPeca(tabuleiro[2][0],WIDTH-165,110)
+    desenhaPecaMancala(tabuleiro[2][0],WIDTH-165,110)
 
     #Casas
     for i in range(6):
         pygame.draw.rect(tela,corCasa,(185+(175*i),100,155,250),border_radius=30)
-        desenhaPeca(tabuleiro[1][5-i],190+(175*i),110)
+        desenhaPecaCasa(tabuleiro[1][5-i],190+(175*i),110)
         pygame.draw.rect(tela,corCasa,(185+(175*i),450,155,250),border_radius=30)
-        desenhaPeca(tabuleiro[0][i],190+(175*i),460)
+        desenhaPecaCasa(tabuleiro[0][i],190+(175*i),460)
 
 def atualizaTabuleiro(tabuleiro):
     # Cor de fundo
