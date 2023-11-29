@@ -1,4 +1,4 @@
-def realiza_jogada(tabuleiro, jogador, coluna):
+def realiza_jogada(tabuleiro, jogador, coluna, turno):
   #Passa coluna, apenas quando é o jogador 2, para index correto da lista
   if jogador == 1:
     coluna = coluna - 6
@@ -49,7 +49,20 @@ def realiza_jogada(tabuleiro, jogador, coluna):
 
   #Salva jogador e coluna de onde cai a ultima peça
   if(ultima_peca != None):
-    jogador, coluna = ultima_peca
+    jogador1, coluna = ultima_peca
+
+  #Caso caia na mancala, jogador tem direito a mais uma jogada
+  if jogador1 == 2:
+    turno[0] = jogador
+
+  #Caso não caia na mancala, turno vai para proximo jogador
+  else:
+    turno[0] = 1 - turno[0]
+
+  #Chama função que faz a captura de peça
+  captura_peca(tabuleiro,jogador,jogador1,coluna)
+
+  print(turno[0])
   
   #Retorna tabuleiro para ser renderizado.
   return tabuleiroNovo

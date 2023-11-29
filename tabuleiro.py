@@ -48,8 +48,12 @@ def verificaClique(tabuleiro,pos,turno):
     
     # Printa a casa se for clicada corretamente, e retorna um erro se a região clicada for fora de uma casa.
     if casa >= 0 and jogador == turno and tabuleiro[jogador][casa - (6 * jogador)] != 0:
-        realiza_jogada(tabuleiro,jogador,casa)
-        return 1 - turno
+        #Lista criada para turno poder ser alterado dentro da realiza jogada
+        turno_lista = [0]
+        turno_lista[0] = turno
+        realiza_jogada(tabuleiro,jogador,casa,turno_lista)
+        turno = turno_lista[0]
+        return turno
     else:
         print(f'x,y = {x,y}')
         print('Selecione uma casa valida.')
@@ -102,7 +106,7 @@ def atualizaTabuleiro(tabuleiro):
 
 def rodar():
 
-    tabuleiro = [[4] * 6, [4] * 6, [0, 0]]
+    tabuleiro = [[4,4,4,4,4,4],[4,4,4,4,4,4], [0, 0]]
     turno = 0
 
     pygame.init()
