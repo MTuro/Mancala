@@ -108,8 +108,10 @@ def atualizaTabuleiro(tabuleiro):
 
 def rodar():
 
-    tabuleiro = [[4,4,4,4,4,4],[4,4,4,4,4,4], [0, 0]]
+    tabuleiro = [[4]*6,[4]*6, [0, 0]]
+    dicionario = {}
     turno = 0
+    partida = 1
 
     pygame.init()
 
@@ -121,6 +123,6 @@ def rodar():
                 run = False
             if event.type == pygame.MOUSEBUTTONUP:
                 turno = verificaClique(tabuleiro,pygame.mouse.get_pos(),turno)
-                tabuleiro = verifica_fim(tabuleiro)
+                tabuleiro, dicionario, partida = verifica_fim(tabuleiro, dicionario, partida)
 
         atualizaTabuleiro(tabuleiro)
