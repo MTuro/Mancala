@@ -1,5 +1,5 @@
 import pygame
-from partida import realiza_jogada, verifica_fim
+from partida import realiza_jogada, verifica_fim, valida_jogada
 
 WIDTH = 1400
 HEIGHT = 800
@@ -72,8 +72,8 @@ def desenhaPecaMancala(qtd,x,y):
     
     for i in range(qtd):
         pos = i//2
-        pygame.draw.circle(tela,(255,255,255),(x+20+30*(i%4),y+50+(25*pos)),12)
-        pygame.draw.circle(tela,(255,0,0),(x+20+30*(i%4),y+50+(25*pos)),10)
+        pygame.draw.circle(tela,(255,255,255),(x+20+30*(i%2),y+50+(25*pos)),12)
+        pygame.draw.circle(tela,(255,0,0),(x+20+30*(i%2),y+50+(25*pos)),10)
 
 
 def desenhaTabuleiro(tabuleiro):
