@@ -1,5 +1,5 @@
 import pygame
-from partida import realiza_jogada, verifica_fim
+from partida import realiza_jogada, verifica_fim, valida_jogada
 
 WIDTH = 1400
 HEIGHT = 800
