@@ -61,8 +61,6 @@ def realiza_jogada(tabuleiro, jogador, coluna, turno):
 
   #Chama função que faz a captura de peça
   captura_peca(tabuleiro,jogador,jogador1,coluna)
-
-  print(turno[0])
   
   #Retorna tabuleiro para ser renderizado.
   return tabuleiroNovo
@@ -113,19 +111,27 @@ def pega_todas_pecas(tabuleiro):
   # Retorna o tabuleiro final para ser renderizado.
   return tabuleiroFinal
 
-def captura_peca(tabuleiro,jogador,coluna):
-  # Cria uma cópia do tabuleiro.
+def captura_peca(tabuleiro,jogador,jogador2,coluna):
+  #Clona o tabuleiro
   tabuleiroNovo = tabuleiro
 
-  # Soma as peças envolvidas na captura a mancala do jogador que capturou.
-  if jogador == 0:
-    tabuleiroNovo[2][0] += tabuleiro[1][coluna] + 1
-  else:
-    tabuleiroNovo[2][1] += tabuleiro[0][coluna] + 1
-
-  # Zera o número de peças nas casas envolvidas na captura (todas as peças envolvidas vão para a Mancala daquele que capturou).
-  tabuleiroNovo[0][coluna] = 0
-  tabuleiroNovo[1][coluna] = 0
+  #Confere se a ultima peça cai numa casa do jogador daquela rodada
+  if jogador != jogador2:
+    return tabuleiroNovo
   
-  # Retorna o tabuleiro pós-captura para ser renderizado.
+  #Confere se cai na mancala
+  elif jogador2 == 2:
+    return tabuleiroNovo
+
+  #jogador 2 -> 5,4,3,2,1,0
+  #jogador 1 -> 0,1,2,3,4,5
+
+  if jogador == 0 and tabuleiroNovo[jogador][coluna] == 1:
+    tabuleiroNovo[2][0] += tabuleiroNovo[1][-1*(coluna-5)]
+    tabuleiroNovo[1][-1*(coluna-5)] = 0
+
+  elif jogador == 1 and tabuleiroNovo[jogador][coluna] == 1:
+    tabuleiroNovo[2][1] += tabuleiroNovo[0][-1*(coluna-5)]
+    tabuleiroNovo[0][-1*(coluna-5)] = 0
+  
   return tabuleiroNovo
