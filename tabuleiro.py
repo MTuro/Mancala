@@ -47,7 +47,7 @@ def verificaClique(tabuleiro,pos,turno):
             casa = -1
     
     # Printa a casa se for clicada corretamente, e retorna um erro se a região clicada for fora de uma casa.
-    if casa >= 0 and jogador == turno and tabuleiro[jogador][casa - (6 * jogador)] != 0:
+    if valida_jogada(tabuleiro,jogador,casa,turno):
         #Lista criada para turno poder ser alterado dentro da realiza jogada
         turno_lista = [0]
         turno_lista[0] = turno
