@@ -44,4 +44,3 @@ def test_captura_peca():
     tabuleiro = [[0, 0, 0, 0, 0, 1], [1, 1, 1, 1, 1, 0], [0, 0]]
     captura_peca(tabuleiro, 0, 5)
     assert tabuleiro == [[0, 0, 0, 0, 0, 0], [1, 1, 1, 1, 1, 0], [0, 1]]
-    

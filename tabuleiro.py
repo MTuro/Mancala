@@ -64,6 +64,7 @@ def desenhaPecaCasa(qtd,x,y):
 
     for i in range(qtd):
         pos = i//4
+        pygame.draw.circle(tela,(255,255,255),(x+20+30*(i%4),y+50+(25*pos)),12)
         pygame.draw.circle(tela,(255,0,0),(x+20+30*(i%4),y+50+(25*pos)),10)
 
 def desenhaPecaMancala(qtd,x,y):
@@ -71,7 +72,8 @@ def desenhaPecaMancala(qtd,x,y):
     
     for i in range(qtd):
         pos = i//2
-        pygame.draw.circle(tela,(255,0,0),(x+20+30*(i%2),y+50+(25*pos)),10)
+        pygame.draw.circle(tela,(255,255,255),(x+20+30*(i%4),y+50+(25*pos)),12)
+        pygame.draw.circle(tela,(255,0,0),(x+20+30*(i%4),y+50+(25*pos)),10)
 
 
 def desenhaTabuleiro(tabuleiro):
