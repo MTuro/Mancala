@@ -67,7 +67,7 @@ def realiza_jogada(tabuleiro, jogador, coluna, turno):
   #Retorna tabuleiro para ser renderizado.
   return tabuleiroNovo
 
-def verifica_fim(tabuleiro, dicionario, partida):
+def verifica_fim(tabuleiro, dicionario, partida, fim):
   # Soma das peças das casas de cada fileira
   soma_j1 = sum(tabuleiro[0])
   soma_j2 = sum(tabuleiro[1])
@@ -75,27 +75,29 @@ def verifica_fim(tabuleiro, dicionario, partida):
   # Se alguma das fileiras não tiver nenhuma peça, retorna o tabuleiro gerado pela função pega_todas_pecas. Caso contrário, retorna o tabuleiro original.
   if soma_j1 == 0 or soma_j2 == 0:
     print("Fim de jogo.")
-    return pega_todas_pecas(tabuleiro, dicionario, partida)
-  return tabuleiro, dicionario, partida
+    return pega_todas_pecas(tabuleiro, dicionario, partida, fim)
+  return tabuleiro, dicionario, partida, fim
 
 def valida_jogada(tabuleiro, jogador, coluna, turno):
   #Retorna False se casa estiver vazia.
-  if coluna < 0:
+  if coluna < 0: #Quando coluna é -1, significa que o jogador clicou fora do tabuleiro.
     return False
-  if jogador == 1 and turno == 1:
+  if jogador == 1 and turno == 1: #Quando turno é 1, significa que o jogador 2 está jogando.
     if coluna < 6 or tabuleiro[jogador][coluna - 6] == 0:
       return False
-    elif 6 <= coluna <= 11:
+    elif 6 <= coluna <= 11: #De 6 a 11, casas do jogador 2.
       return True
-  elif jogador == 0 and turno == 0:
+  elif jogador == 0 and turno == 0: #Quando turno é 0, significa que o jogador 1 está jogando.
     if coluna > 5 or tabuleiro[jogador][coluna] == 0:
       return False
-    elif 0 <= coluna <= 5:
+    elif 0 <= coluna <= 5: #De 0 a 5, casas do jogador 1.
       return True  
   else:
     return False
 
-def pega_todas_pecas(tabuleiro, dicionario, partida):
+def pega_todas_pecas(tabuleiro, dicionario, partida, fim):
+  #
+  fim = False
   # Soma todas as peças de cada jogador, incluindo as peças em suas Mancalas
   soma_final1 = sum(tabuleiro[0]) + tabuleiro[2][0]
   soma_final2 = sum(tabuleiro[1]) + tabuleiro[2][1]
@@ -114,21 +116,21 @@ def pega_todas_pecas(tabuleiro, dicionario, partida):
   if soma_final1 > soma_final2:
     print("O jogador 1 foi o vencedor.")
     partida += 1
-    print(dicionario)
-    tabuleiroFinal = [[4]*6,[4]*6, [0, 0]]
+    fim = True #Fim da partida.
+    tabuleiroFinal = [[4]*6,[4]*6, [0, 0]] #Volta ao tabuleiro inicial.
   elif soma_final1 < soma_final2:
     print("O jogador 2 foi o vencedor.")
     partida += 1
-    print(dicionario)
-    tabuleiroFinal = [[4]*6,[4]*6, [0, 0]]
+    fim = True #Fim da partida.
+    tabuleiroFinal = [[4]*6,[4]*6, [0, 0]] #Volta ao tabuleiro inicial.
   else:
     print("Empate.")
     partida += 1
-    print(dicionario)
-    tabuleiroFinal = [[4]*6,[4]*6, [0, 0]]
-
+    fim = True #Fim da partida.
+    tabuleiroFinal = [[4]*6,[4]*6, [0, 0]] #Volta ao tabuleiro inicial.
+    
   # Retorna o tabuleiro final para ser renderizado.
-  return tabuleiroFinal, dicionario, partida
+  return tabuleiroFinal, dicionario, partida, fim
 
 def captura_peca(tabuleiro,jogador,jogador2,coluna):
   #Clona o tabuleiro

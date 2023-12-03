@@ -1,4 +1,5 @@
 import pygame
+import time
 from partida import realiza_jogada, verifica_fim, valida_jogada
 
 WIDTH = 1400
@@ -105,12 +106,28 @@ def atualizaTabuleiro(tabuleiro):
     
     # Atualizar a tela
     pygame.display.flip()
+    
+def atualizaPontuacao(fim, dicionario):
+    #Mostra na tela pontuação de cada partida
+    if fim == True:
+        altura_total = len(dicionario) * 50
+        posicao_y = (HEIGHT - altura_total) // 2
+        pygame.draw.rect(tela, corTabuleiro, (50,50,WIDTH-100,HEIGHT-100))
+        for chave, valor in dicionario.items():
+            posicao_x = (WIDTH - font.size(f'{chave}: {dicionario[chave][0]} X {dicionario[chave][1]}')[0]) // 2
+            tela.blit(font.render(f'{chave}: {dicionario[chave][0]} X {dicionario[chave][1]}', True, (0, 0, 0)), (posicao_x, posicao_y))
+            posicao_y += 50 
+    
+    # Atualizar a tela
+    pygame.display.flip()
+      
 
 def rodar():
 
     tabuleiro = [[4]*6,[4]*6, [0, 0]]
     dicionario = {}
     turno = 0
+    fim = False
     partida = 1
 
     pygame.init()
@@ -123,6 +140,14 @@ def rodar():
                 run = False
             if event.type == pygame.MOUSEBUTTONUP:
                 turno = verificaClique(tabuleiro,pygame.mouse.get_pos(),turno)
-                tabuleiro, dicionario, partida = verifica_fim(tabuleiro, dicionario, partida)
+                atualizaTabuleiro(tabuleiro)
+                tabuleiro,dicionario,partidaAux,fim = verifica_fim(tabuleiro, dicionario, partida, fim)
+                if fim:
+                    time.sleep(1)
+                    atualizaPontuacao(fim, dicionario)
+                    time.sleep(2)
+                    partida = partidaAux
+
 
         atualizaTabuleiro(tabuleiro)
+        fim = False
