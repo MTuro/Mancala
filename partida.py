@@ -147,14 +147,14 @@ def captura_peca(tabuleiro,jogador,jogador2,coluna):
   
   #Verifica se a ultima casa caiu numa casa vazia e se pertence ao jogador da rodada e verifica se casa do oponente está vazia, se sim, captura as peças
   if jogador == 0 and tabuleiroNovo[jogador][coluna] == 1 and tabuleiroNovo[1][-1*(coluna-5)] != 0:
-    tabuleiroNovo[2][0] += tabuleiroNovo[1][-1*(coluna-5)]
-    tabuleiroNovo[2][0] += 1
+    tabuleiroNovo[2][jogador] += tabuleiroNovo[1][-1*(coluna-5)]
+    tabuleiroNovo[2][jogador] += 1
     tabuleiroNovo[1][-1*(coluna-5)] = 0
     tabuleiroNovo[jogador][coluna] = 0
 
   elif jogador == 1 and tabuleiroNovo[jogador][coluna] == 1 and tabuleiroNovo[0][-1*(coluna-5)]:
-    tabuleiroNovo[2][1] += tabuleiroNovo[0][-1*(coluna-5)]
-    tabuleiroNovo[2][0] += 1
+    tabuleiroNovo[2][jogador] += tabuleiroNovo[0][-1*(coluna-5)]
+    tabuleiroNovo[2][jogador] += 1
     tabuleiroNovo[0][-1*(coluna-5)] = 0
     tabuleiroNovo[jogador][coluna] = 0
   
