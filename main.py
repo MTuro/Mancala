@@ -1,3 +1,3 @@
-from tabuleiro import rodar
+from menu import run
 
-rodar()
+run()
